@@ -136,6 +136,7 @@ prior_data = {
 for idx, (key, data) in enumerate(prior_data.items()):
     if data is not None:
         cond_flags[idx] = 1
+        inputs[key] = data
 
 # --- Inference ---
 with torch.no_grad():
