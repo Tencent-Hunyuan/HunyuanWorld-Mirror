@@ -147,13 +147,14 @@ with torch.no_grad():
 
 ```python
 # Geometry outputs
-pts3d_preds = predictions["pts3d"][0]      # 3D pointmap in world coordinate: [S, H, W, 3]
-depth_preds = predictions["depth"][0]     # Z-depth in camera frame: [S, H, W, 1]
-normal_preds = predictions["normals"][0]   # Surface normal in camera coordinate: [S, H, W, 3]
+pts3d_preds, pts3d_conf = predictions["pts3d"][0], predictions["pts3d_conf"][0]       # 3D point cloud in world coordinate: [S, H, W, 3] and point confidence: [S, H, W]
+depth_preds, depth_conf = predictions["depth"][0], predictions["depth_conf"][0]       # Z-depth in camera frame: [S, H, W, 1] and depth confidence: [S, H, W]
+normal_preds, normal_conf = predictions["normals"][0], predictions["normals_conf"][0] # Surface normal in camera coordinate: [S, H, W, 3] and normal confidence: [S, H, W]
 
 # Camera outputs
 camera_poses = predictions["camera_poses"][0]  # Camera-to-world poses (OpenCV convention): [S, 4, 4]
 camera_intrs = predictions["camera_intrs"][0]  # Camera intrinsic matrices: [S, 3, 3]
+camera_params = predictions["camera_params"][0]   # Camera vector: [S, 9] (translation, quaternion rotation, fov_v, fov_u)
 
 # 3D Gaussian Splatting outputs
 splats = predictions["splats"]

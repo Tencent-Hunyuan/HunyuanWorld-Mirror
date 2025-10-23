@@ -242,13 +242,7 @@ class GaussianSplatRenderer(nn.Module):
         rendered_alphas = torch.cat(rendered_alphas_list, dim=1)
 
         # 5) return predictions
-        predictions["rendered_colors"] = rendered_colors
-        predictions["rendered_depths"] = rendered_depths
-        predictions["gt_colors"] = gt_colors
         predictions["splats"] = splats
-        predictions["splats_raw"] = splats_raw
-        predictions["rendered_extrinsics"] = render_viewmats
-        predictions["rendered_intrinsics"] = render_Ks
 
         return predictions
 

@@ -143,13 +143,14 @@ with torch.no_grad():
 
 ```python
 # 几何输出
-pts3d_preds = predictions["pts3d"][0]      # 世界坐标系中的3D点图：[S, H, W, 3]
-depth_preds = predictions["depth"][0]     # 相机坐标系中的Z深度：[S, H, W, 1]
-normal_preds = predictions["normals"][0]   # 相机坐标系中的表面法线：[S, H, W, 3]
+pts3d_preds, pts3d_conf = predictions["pts3d"][0], predictions["pts3d_conf"][0]      # 世界坐标系中的3D点云：[S, H, W, 3], 点云置信度: [S, W, H] 
+depth_preds, depth_conf = predictions["depth"][0], predictions["depth_conf"][0]      # 相机坐标系中的Z深度：[S, H, W, 1], 深度置信度: [S, W, H] 
+normal_preds, normal_conf = predictions["normals"][0], predictions["normals_conf"][0] # 相机坐标系中的表面法线：[S, H, W, 3], 法线置信度: [S, W, H] 
 
 # 相机输出
 camera_poses = predictions["camera_poses"][0]  # 相机到世界的位姿（OpenCV约定）：[S, 4, 4]
 camera_intrs = predictions["camera_intrs"][0]  # 相机内参矩阵：[S, 3, 3]
+camera_params = predictions["camera_params"][0]   # 相机向量：[S, 9]（平移，旋转四元数，fov_v，fov_u）
 
 # 3D 高斯点云输出
 splats = predictions["splats"]

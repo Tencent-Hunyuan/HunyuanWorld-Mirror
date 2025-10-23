@@ -155,7 +155,6 @@ class WorldMirror(nn.Module, PyTorchModelHubMixin):
                       imgs, patch_start_idx, views):
         """Generate all enabled predictions"""
         preds = {}
-        preds['images'] = imgs
 
         # Camera pose prediction
         if self.enable_cam:
