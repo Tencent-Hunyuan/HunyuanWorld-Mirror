@@ -61,7 +61,7 @@ def create_confidence_mask(confidence: torch.Tensor,
 
 def main():
     parser = argparse.ArgumentParser(description="HunyuanWorld-Mirror inference")
-    parser.add_argument("--input_path", type=str, default="examples/stylistic/Cat_Girl", help="Input can be: a directory of images; a single video file; or a directory containing multiple video files (.mp4/.avi/.mov/.webm/.gif). If directory has multiple videos, frames from all clips are extracted (using --fps) and merged in filename order.")
+    parser.add_argument("--input_path", type=str, default="examples/realistic/Ireland_Landscape", help="Input can be: a directory of images; a single video file; or a directory containing multiple video files (.mp4/.avi/.mov/.webm/.gif). If directory has multiple videos, frames from all clips are extracted (using --fps) and merged in filename order.")
     parser.add_argument("--output_path", type=str, default="inference_output")
     parser.add_argument("--conf_threshold", type=float, default=0.0, help="Confidence threshold percentage for filtering points (0-100)")
     parser.add_argument("--fps", type=int, default=1, help="Frames per second for video extraction")
@@ -272,9 +272,11 @@ def main():
         print(f"colmap_width: {final_width}, colmap_height: {final_height}")
         
         # Prepare extrinsics/intrinsics (camera-from-world) using resized image size
-        e3x4, intr = vector_to_camera_matrices(predictions["camera_params"], image_hw=(H, W))
+        e3x4, intr = vector_to_camera_matrices(predictions["camera_params"], image_hw=(final_height, final_width))
+        _, intr_resize = vector_to_camera_matrices(predictions["camera_params"], image_hw=(H, W))
         extrinsics = e3x4[0] # [S,3,4]
         intrinsics = intr[0] # [S,3,3]
+        intrinsics_resize = intr_resize[0] # [S,3,3]
                 
         points_list = []
         colors_list = []
@@ -297,7 +299,7 @@ def main():
             w2c = extrinsics[i][:3, :4]  # [3, 4] camera-to-world
             w2c = torch.cat([w2c, torch.tensor([[0, 0, 0, 1]], device=w2c.device)], dim=0)  # [4,4]
             c2w = torch.linalg.inv(w2c)[:3, :4]  # [4,4]
-            K = intrinsics[i]
+            K = intrinsics_resize[i]
             pts_i, _, mask = depth_to_world_coords_points(d[None], c2w[None], K[None])
 
             img_colors = (imgs[0, i].permute(1, 2, 0) * 255).to(torch.uint8)
