@@ -132,6 +132,16 @@ def render_interpolated_video(gs_renderer: GaussianSplatRenderer,
     # camtoworlds: [B, S, 4, 4], intrinsics: [B, S, 3, 3]
     b, s, _, _ = camtoworlds.shape
     h, w = hw
+    device = camtoworlds.device
+
+    # Ensure all splat tensors live on the same CUDA device as the cameras
+    def _move_splats_to_device(splats_dict, dev):
+        moved = {}
+        for k, v in splats_dict.items():
+            moved[k] = v.to(dev) if torch.is_tensor(v) else v
+        return moved
+
+    splats = _move_splats_to_device(splats, device)
 
     # Build interpolated trajectory
     def build_interpolated_traj(index, nums):

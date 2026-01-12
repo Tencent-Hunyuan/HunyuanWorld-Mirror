@@ -58,7 +58,6 @@ class Rasterizer:
             rasterize_mode=self.rasterization_mode,
             distributed=self.distributed,
             camera_model=self.camera_model,
-            with_eval3d=self.with_eval3d,
             render_mode="RGB+ED",
             **kwargs,
         )
@@ -67,6 +66,9 @@ class Rasterizer:
     def rasterize_batches(self, means, quats, scales, opacities, colors, viewmats, Ks, width, height, **kwargs):
         rendered_colors, rendered_depths, rendered_alphas = [], [], []
         batch_size = len(means)
+        # Ensure CUDA current device matches input tensors to avoid ordinal errors
+        if torch.cuda.is_available() and viewmats.is_cuda:
+            torch.cuda.set_device(viewmats.get_device())
         
         for i in range(batch_size):
             means_i = means[i]  # [N, 4]
@@ -176,7 +178,10 @@ class GaussianSplatRenderer(nn.Module):
         else:
             # Re-predict the camera for novel views and perform translation scale alignment
             pred_all_extrinsic, pred_all_intrinsic = self.prepare_cameras(predictions, S + V)
-            scale_factor = 1.0
+            # Default to a per-batch scale tensor so downstream math never hits Python floats
+            scale_factor = torch.ones(
+                (B, 1), device=pred_all_extrinsic.device, dtype=pred_all_extrinsic.dtype
+            )
             if "camera_poses" in context_predictions:
                 pred_context_extrinsic, _ = self.prepare_cameras(context_predictions, S)
                 scale_factor = pred_context_extrinsic[:, :, :3, 3].norm(dim=-1).mean(dim=1, keepdim=True) / (

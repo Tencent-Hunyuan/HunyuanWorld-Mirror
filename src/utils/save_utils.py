@@ -147,8 +147,11 @@ def save_gs_ply(path: Path,
         opacities: Opacity values [N]
     """
     # Filter out points with scales greater than the 95th percentile
-    scale_threshold = torch.quantile(scales.max(dim=-1)[0], 0.95, dim=0)
-    filter_mask = scales.max(dim=-1)[0] <= scale_threshold
+    # Use numpy on CPU to avoid torch.quantile size limits
+    scale_max = scales.max(dim=-1)[0]
+    scale_max_np = scale_max.detach().cpu().float().numpy()
+    scale_threshold = float(np.quantile(scale_max_np, 0.95))
+    filter_mask = scale_max <= scale_threshold
 
     # Apply the filter to all tensors
     means = means[filter_mask].reshape(-1, 3)
