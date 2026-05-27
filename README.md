@@ -26,7 +26,7 @@ https://github.com/user-attachments/assets/146a9a25-5eb7-4400-aa09-5b58e1d10a5e
 
 
 ## 🔥🔥🔥 Updates
-* **[Apr 16, 2026]**: 🚀🚀🚀 WorldMirror is accepted to ICML 2026!
+* **[May 20, 2026]**: 🚀🚀🚀 WorldMirror is accepted to ICML 2026!
 * **[Apr 16, 2026]**: 🤗 We release [HY-World-2.0](https://github.com/Tencent-Hunyuan/HY-World-2.0) with [WorldMirror-2.0](https://github.com/Tencent-Hunyuan/HY-World-2.0#code-usage--worldmirror-20), state-of-the-art 3D world model! 
 * **[Dec 17, 2025]**:  🤗 We release [HunyuanWorld-1.5](https://github.com/Tencent-Hunyuan/HY-WorldPlay), enabling real-time world creation and play! 
 * **[Nov 7, 2025]**: 🚀🚀🚀 We release the training and evaluation code. See [Training Instructions](#🤖-training) and [Evaluation Instructions](#📊-evaluation).
