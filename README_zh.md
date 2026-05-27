@@ -25,6 +25,8 @@ https://github.com/user-attachments/assets/ced3ef9e-8f90-423f-8ad0-ada9069111d6
 
 
 ## 🔥🔥🔥 更新
+* **[2026年5月20日]**: 🚀🚀🚀 WorldMirror论文被ICML2026接收了!
+* **[2026年4月16日]**: 🤗 我们发布了 [HY-World-2.0](https://github.com/Tencent-Hunyuan/HY-World-2.0) 和 [WorldMirror-2.0](https://github.com/Tencent-Hunyuan/HY-World-2.0#code-usage--worldmirror-20), 3D世界模型新标杆! 
 * **[2025年11月7日]**：🚀🚀🚀 我们发布了训练和评估代码。详见[训练说明](#🤖-训练)和[评估说明](#📊-评估)。
 * **[2025年10月22日]**：我们发布了推理代码和模型权重。[下载预训练模型](https://huggingface.co/tencent/HunyuanWorld-Mirror)。
 
