@@ -32,9 +32,9 @@ https://github.com/user-attachments/assets/146a9a25-5eb7-4400-aa09-5b58e1d10a5e
 * **[Nov 7, 2025]**: 🚀🚀🚀 We release the training and evaluation code. See [Training Instructions](#🤖-training) and [Evaluation Instructions](#📊-evaluation).
 * **[Oct 22, 2025]**: We release the inference code and model weights. [Download Pretrained Model](https://huggingface.co/tencent/HunyuanWorld-Mirror).
 
-> Join our **[Wechat](#)** and **[Discord](https://discord.gg/dNBrdrGGMa)** group to discuss and find help from us.
+> Join our **[WeChat](#)** and **[Discord](https://discord.gg/dNBrdrGGMa)** group to discuss and find help from us.
 
-| Wechat Group                                     | Xiaohongshu                                           | X                                           | Discord                                           |
+| WeChat Group                                     | Xiaohongshu                                           | X                                           | Discord                                           |
 |--------------------------------------------------|-------------------------------------------------------|---------------------------------------------|---------------------------------------------------|
 | <img src="assets/qrcode/wechat.png"  height=140> | <img src="assets/qrcode/xiaohongshu.png"  height=140> | <img src="assets/qrcode/x.png"  height=140> | <img src="assets/qrcode/discord.png"  height=140> | 
 
